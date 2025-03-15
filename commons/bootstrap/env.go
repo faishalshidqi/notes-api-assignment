@@ -10,7 +10,7 @@ type Env struct {
 	ContextTimeout int    `mapstructure:"CONTEXT_TIMEOUT"`
 	AccessTokenKey string `mapstructure:"ACCESS_TOKEN_KEY"`
 	AccessTokenAge int    `mapstructure:"ACCESS_TOKEN_AGE"`
-	DBUser         string `mapstructure:"MYSQL_USER"`
+	DBUser         string `mapstructure:"MYSQL_ROOT_USER"`
 	DBPassword     string `mapstructure:"MYSQL_ROOT_PASSWORD"`
 	DBHost         string `mapstructure:"DBHOST"`
 	DBPort         string `mapstructure:"DBPORT"`
