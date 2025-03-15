@@ -25,6 +25,12 @@ func main() {
 	timeout := time.Duration(env.ContextTimeout) * time.Second
 	router := gin.Default()
 	routes.Setup(env, timeout, db, router)
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	swagger := router.Group("/swagger")
+	{
+		swagger.StaticFile("/doc.json", "./docs/swagger.json")
+	}
+	swaggerUrl := ginSwagger.URL("http://localhost:5000/swagger/doc.json")
+	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, swaggerUrl))
+
 	router.Run(env.ServerAddr)
 }
