@@ -10,7 +10,7 @@ go version go1.24.1 windows/amd64
 ```
 
 1. Clone this repository
-```git clone ...```
+```git clone https://github.com/faishalshidqi/notes-api-assignment```
 2. Add a .env file
 3. Add this environment variables to .env
    - SERVER_ADDRESS (should be filled with an address the server will be running from. e.g.: localhost:9000 or 0.0.0.0:5000)
