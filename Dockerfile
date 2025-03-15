@@ -2,9 +2,9 @@ FROM golang:1.24-bookworm AS builder
 WORKDIR /app
 COPY ./ /app
 COPY ./.env /app/.env
-RUN go build -o /notesapi
+RUN CGO_ENABLED=0 GOOS=linux go build -o /notesapi
 
-FROM debian:bookworm-slim
+FROM alpine:latest
 WORKDIR /
 COPY --from=builder /app/.env /.env
 COPY --from=builder /notesapi /notesapi
