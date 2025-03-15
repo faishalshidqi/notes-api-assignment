@@ -25,6 +25,10 @@ func main() {
 
 	timeout := time.Duration(env.ContextTimeout) * time.Second
 	router := gin.Default()
+
+	fs := static.LocalFile("./frontend/dist", true)
+	router.Use(static.Serve("/", fs))
+
 	router.Use(cors.New(cors.Config{
 		AllowAllOrigins: true,
 		AllowMethods:    []string{"GET", "POST", "PUT", "PATCH", "DELETE"},
