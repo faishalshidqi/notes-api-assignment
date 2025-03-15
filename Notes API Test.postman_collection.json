@@ -512,8 +512,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('response status code should have 404 value', () => {\r",
-									"    pm.response.to.have.status(404);\r",
+									"pm.test('response status code should have 401 value', () => {\r",
+									"    pm.response.to.have.status(401);\r",
 									"});\r",
 									" \r",
 									"pm.test('response Content-Type header should have application/json value', () => {\r",
@@ -540,17 +540,26 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "xxx",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:5000/users/xxxx",
+							"raw": "localhost:5000/users",
 							"host": [
 								"localhost"
 							],
 							"port": "5000",
 							"path": [
-								"users",
-								"xxxx"
+								"users"
 							]
 						}
 					},
