@@ -6,6 +6,7 @@ RUN go build -o /notesapi
 
 FROM debian:bookworm-slim
 WORKDIR /
+COPY --from=builder /app/.env /.env
 COPY --from=builder /notesapi /notesapi
 EXPOSE 5000
 ENTRYPOINT ["/notesapi"]
