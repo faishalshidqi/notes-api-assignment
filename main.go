@@ -25,6 +25,11 @@ func main() {
 
 	timeout := time.Duration(env.ContextTimeout) * time.Second
 	router := gin.Default()
+	router.Use(cors.New(cors.Config{
+		AllowAllOrigins: true,
+		AllowMethods:    []string{"GET", "POST", "PUT", "PATCH", "DELETE"},
+		AllowHeaders:    []string{"Origin", "Content-Length", "Content-Type", "Authorization"},
+	}))
 	routes.Setup(env, timeout, db, router)
 	swagger := router.Group("/swagger")
 	{
@@ -33,10 +38,5 @@ func main() {
 	swaggerUrl := ginSwagger.URL("http://localhost:5000/swagger/doc.json")
 	router.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, swaggerUrl))
 
-	router.Use(cors.New(cors.Config{
-		AllowAllOrigins: true,
-		AllowMethods:    []string{"GET", "POST", "PUT", "PATCH", "DELETE"},
-		AllowHeaders:    []string{"Origin", "Content-Length", "Content-Type", "Authorization"},
-	}))
 	router.Run(env.ServerAddr)
 }
