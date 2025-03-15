@@ -1,0 +1,10 @@
+version: "2"
+sql:
+  - schema: "infrastructures/sql/schema/"
+    queries: "infrastructures/sql/queries/"
+    engine: "mysql"
+    gen:
+      go:
+        out: "infrastructures/sql/database"
+        emit_db_tags: true
+        emit_json_tags: true
