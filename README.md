@@ -38,3 +38,5 @@ For example, if you run this with docker compose. Use this command,
 goose mysql "root:<password of your choosing>@tcp(localhost:3307)/notes_api" up
 ```
 7. Import [Notes API Test.postman_collection.json](Notes%20API%20Test.postman_collection.json) and [Notes API Test.postman_environment.json](Notes%20API%20Test.postman_environment.json) to Postman so you can test the API. And don't forget to switch the environment on before sending requests.
+> [!IMPORTANT]
+> Swagger UI is only visible /docs/index.html if the API isn't run with Docker. To see swagger ui, just `go run main.go`. Don't forget to adjust the env vars.
