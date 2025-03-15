@@ -32,7 +32,7 @@ docker compose up -d
 6. This project implements database migration. Please install any database migration tool for golang
 One of the tools you can use is [goose](https://github.com/pressly/goose). Install goose with this command ```go install github.com/pressly/goose/v3/cmd/goose@latest```
 7. Go back to project root folder, then navigate to the infrastructures/sql/schema folder.
-8. If your mysql instance authenticate using url + username + password. Migrate the database up with
+8. If your mysql instance authenticates using url + username + password. Migrate up with
 ```shell
 goose mysql "<mysql username>:<mysql password>@tcp(<mysql ip>:<mysql port>)/<mysql name>" up
 ```
@@ -40,12 +40,12 @@ For example, if you run this with docker compose. Use this command,
 ```shell
 goose mysql "root:<the MYSQL_ROOT_PASSWORD value>@tcp(localhost:3307)/notes_api" up
 ```
-8. Import [Notes API Test.postman_collection.json](Notes%20API%20Test.postman_collection.json) and [Notes API Test.postman_environment.json](Notes%20API%20Test.postman_environment.json) to Postman so you can test the API. And don't forget to switch the environment on before sending requests.
+9. Import [Notes API Test.postman_collection.json](Notes%20API%20Test.postman_collection.json) and [Notes API Test.postman_environment.json](Notes%20API%20Test.postman_environment.json) to Postman so you can test the API. And don't forget to switch the environment on before sending requests.
 > [!IMPORTANT]
-> Swagger UI is only visible /docs/index.html if the API isn't run with Docker. To see swagger ui, just `go run main.go`. Don't forget to adjust the env vars.
+> Swagger UI is only visible at http://localhost:5000/docs/index.html if the API isn't run with Docker. To see swagger ui, just `go run main.go`. Don't forget to adjust the env vars.
 
 > [!IMPORTANT]
 > swagger.json documentation is in the docs folder.
 
 > [!IMPORTANT]
-> frontend is can be visited at http://localhost:5000
+> frontend can be visited at http://localhost:5000
