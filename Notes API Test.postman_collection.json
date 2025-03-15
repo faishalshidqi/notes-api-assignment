@@ -60,7 +60,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"{{$timestamp}}-{{newUsername}}\",\r\n    \"password\": \"{{newPassword}}\",\r\n    \"fullname\": \"{{newFullname}}\"\r\n}",
+							"raw": "{\r\n    \"username\": \"{{newUsername}}\",\r\n    \"password\": \"{{newPassword}}\",\r\n    \"fullname\": \"{{newFullname}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
