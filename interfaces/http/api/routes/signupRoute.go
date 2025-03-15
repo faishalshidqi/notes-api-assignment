@@ -13,11 +13,13 @@ import (
 func newSignupRouter(env *bootstrap.Env, timeout time.Duration, db bootstrap.Database, router *gin.RouterGroup) {
 	userRepository := repository.NewPostgresUserRepository(db)
 	passwordHash := security.NewBcryptPasswordHash()
+	tokenManager := security.NewJwtTokenManager()
 	signupController := controllers.SignupController{
 		SignupUsecase: usecase.NewSignupUsecase(userRepository, timeout),
 		PasswordHash:  passwordHash,
+		TokenManager:  tokenManager,
 		Env:           env,
 	}
 	router.POST("/users", signupController.Signup)
-	router.GET("/users/:user_id", signupController.GetUser)
+	router.GET("/users", signupController.GetUser)
 }
