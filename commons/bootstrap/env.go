@@ -10,11 +10,11 @@ type Env struct {
 	ContextTimeout int    `mapstructure:"CONTEXT_TIMEOUT"`
 	AccessTokenKey string `mapstructure:"ACCESS_TOKEN_KEY"`
 	AccessTokenAge int    `mapstructure:"ACCESS_TOKEN_AGE"`
-	DBUser         string `mapstructure:"DBUSER"`
-	DBPassword     string `mapstructure:"DBPASSWORD"`
+	DBUser         string `mapstructure:"MYSQL_USER"`
+	DBPassword     string `mapstructure:"MYSQL_ROOT_PASSWORD"`
 	DBHost         string `mapstructure:"DBHOST"`
 	DBPort         string `mapstructure:"DBPORT"`
-	DBDatabase     string `mapstructure:"DBDATABASE"`
+	DBDatabase     string `mapstructure:"MYSQL_DATABASE"`
 }
 
 func NewEnv() *Env {
