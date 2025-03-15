@@ -4,6 +4,7 @@ import (
 	"assignment/applications/security"
 	"assignment/commons/bootstrap"
 	"assignment/domains"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"log/slog"
 	"net/http"
@@ -11,6 +12,7 @@ import (
 
 type SignupController struct {
 	SignupUsecase domains.SignupUsecase
+	TokenManager  security.AuthnTokenManager
 	PasswordHash  security.PasswordHash
 	Env           *bootstrap.Env
 }
@@ -80,13 +82,29 @@ func (sc *SignupController) Signup(c *gin.Context) {
 //	@Tags		users
 //	@Accept		json
 //	@Produce	json
-//	@Param		user_id	path		string	true	"id of the user"
-//	@Success	200		{object}	domains.SignupResponse
-//	@Failure	404		{object}	domains.ErrorResponse
-//	@Router		/users/{user_id} [get]
+//	@Param		Authorization	header		string	true	"Bearer Token"
+//	@Success	200				{object}	domains.SignupResponse
+//	@Failure	404				{object}	domains.ErrorResponse
+//	@Router		/users [get]
 func (sc *SignupController) GetUser(c *gin.Context) {
-	userId := c.Param("user_id")
-	user, err := sc.SignupUsecase.GetUserByID(c, userId)
+	token, err := sc.TokenManager.GetBearerToken(c.Request.Header)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, domains.ErrorResponse{
+			Status:  "fail",
+			Message: "Invalid token structure",
+		})
+		return
+	}
+	id, err := sc.TokenManager.VerifyToken(token, sc.Env.AccessTokenKey)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, domains.ErrorResponse{
+			Status:  "fail",
+			Message: "Invalid bearer token",
+		})
+		return
+	}
+	fmt.Println(id)
+	user, err := sc.SignupUsecase.GetUserByID(c, id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, domains.ErrorResponse{
 			Status:  "fail",
