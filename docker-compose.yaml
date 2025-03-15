@@ -1,6 +1,10 @@
 version: '3.3'
 services:
   app:
+    ports:
+      - "5000${SERVER_ADDRESS}"
+    expose:
+      - 5000
     restart: always
     depends_on:
     - db
