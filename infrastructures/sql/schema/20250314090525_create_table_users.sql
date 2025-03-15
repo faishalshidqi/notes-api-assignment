@@ -1,6 +1,6 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE TABLE Users (
+CREATE TABLE users (
     id varchar(255) NOT NULL,
     username text not null,
     password text not null,
@@ -13,5 +13,5 @@ CREATE TABLE Users (
 
 -- +goose Down
 -- +goose StatementBegin
-drop table Users;
+drop table users;
 -- +goose StatementEnd
