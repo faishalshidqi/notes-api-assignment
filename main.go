@@ -4,6 +4,7 @@ import (
 	"assignment/commons/bootstrap"
 	"assignment/interfaces/http/api/routes"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
