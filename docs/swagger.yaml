@@ -357,6 +357,29 @@ paths:
       tags:
       - notes
   /users:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Bearer Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domains.SignupResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/domains.ErrorResponse'
+      summary: Fetch User Data By ID
+      tags:
+      - users
     post:
       consumes:
       - application/json
@@ -399,30 +422,6 @@ paths:
           schema:
             $ref: '#/definitions/domains.ErrorResponse'
       summary: Register A User
-      tags:
-      - users
-  /users/{user_id}:
-    get:
-      consumes:
-      - application/json
-      parameters:
-      - description: id of the user
-        in: path
-        name: user_id
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/domains.SignupResponse'
-        "404":
-          description: Not Found
-          schema:
-            $ref: '#/definitions/domains.ErrorResponse'
-      summary: Fetch User Data By ID
       tags:
       - users
 swagger: "2.0"
