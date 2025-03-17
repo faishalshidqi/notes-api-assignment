@@ -15,7 +15,7 @@ Docker version 28.0.1, build 068a01e
 ```git clone https://github.com/faishalshidqi/notes-api-assignment```
 2. Add a .env file
 3. Add this environment variables to .env
-   - SERVER_ADDRESS (should be filled with an address the server will be running from. e.g.: localhost:9000 or 0.0.0.0:5000)
+   - SERVER_ADDRESS (should be filled with a port number in ":<port number>" format. e.g. :5000 if you want to run it on port 5000)
    - CONTEXT_TIMEOUT (should be filled with an integer, context timeout is in seconds. ideally within 3-5 seconds.)
    - ACCESS_TOKEN_KEY (should be filled with a hex for access token key)
    - ACCESS_TOKEN_AGE (should be filled with an integer, access token age is in hours)
