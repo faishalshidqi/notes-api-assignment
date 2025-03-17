@@ -24,15 +24,14 @@ Docker version 28.0.1, build 068a01e
    - DBHOST (should be filled with the database hostname or IP address. Fill with host.docker.internal if you run with docker)
    - DBPORT (should be filled with the database port. Fill with 3307 if you run with docker)
    - MYSQL_DATABASE (should be filled with the database name)
-4. run `cd ./frontend;npm i;npm run build` to build the frontend
-5. run this command to build and run notes api
+4. run this command to build and run notes api
 ```shell
 docker compose up -d
 ```
-6. This project implements database migration. Please install any database migration tool for golang
+5. This project implements database migration. Please install any database migration tool for golang
 One of the tools you can use is [goose](https://github.com/pressly/goose). Install goose with this command ```go install github.com/pressly/goose/v3/cmd/goose@latest```
-7. Go back to project root folder, then navigate to the infrastructures/sql/schema folder.
-8. If your mysql instance authenticates using url + username + password. Migrate up with
+6. Navigate to the infrastructures/sql/schema folder.
+7. If your mysql instance authenticates using url + username + password. Migrate up with
 ```shell
 goose mysql "<mysql username>:<mysql password>@tcp(<mysql ip>:<mysql port>)/<mysql name>" up
 ```
@@ -40,7 +39,7 @@ For example, if you run this with docker compose. Use this command,
 ```shell
 goose mysql "root:<the MYSQL_ROOT_PASSWORD value>@tcp(localhost:3307)/notes_api" up
 ```
-9. Import [Notes API Test.postman_collection.json](Notes%20API%20Test.postman_collection.json) and [Notes API Test.postman_environment.json](Notes%20API%20Test.postman_environment.json) to Postman so you can test the API. And don't forget to switch the environment on before sending requests.
+8. Import [Notes API Test.postman_collection.json](Notes%20API%20Test.postman_collection.json) and [Notes API Test.postman_environment.json](Notes%20API%20Test.postman_environment.json) to Postman so you can test the API. And don't forget to switch the environment on before sending requests.
 > [!IMPORTANT]
 > Swagger UI is only visible at http://localhost:5000/docs/index.html if the API isn't run with Docker. To see swagger ui, just `go run main.go`. Don't forget to adjust the env vars.
 
