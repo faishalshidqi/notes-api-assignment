@@ -4,7 +4,6 @@ import (
 	"assignment/applications/security"
 	"assignment/commons/bootstrap"
 	"assignment/domains"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"log/slog"
 	"net/http"
@@ -103,7 +102,6 @@ func (sc *SignupController) GetUser(c *gin.Context) {
 		})
 		return
 	}
-	fmt.Println(id)
 	user, err := sc.SignupUsecase.GetUserByID(c, id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, domains.ErrorResponse{

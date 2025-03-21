@@ -11,7 +11,7 @@ import (
 )
 
 func newAuthnRouter(env *bootstrap.Env, timeout time.Duration, db bootstrap.Database, router *gin.RouterGroup) {
-	userRepository := repository.NewPostgresUserRepository(db)
+	userRepository := repository.NewMysqlUserRepository(db)
 	tokenManager := security.NewJwtTokenManager()
 	passwordHash := security.NewBcryptPasswordHash()
 	authenticationController := controllers.AuthenticationController{

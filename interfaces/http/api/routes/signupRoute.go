@@ -11,7 +11,7 @@ import (
 )
 
 func newSignupRouter(env *bootstrap.Env, timeout time.Duration, db bootstrap.Database, router *gin.RouterGroup) {
-	userRepository := repository.NewPostgresUserRepository(db)
+	userRepository := repository.NewMysqlUserRepository(db)
 	passwordHash := security.NewBcryptPasswordHash()
 	tokenManager := security.NewJwtTokenManager()
 	signupController := controllers.SignupController{

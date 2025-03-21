@@ -11,10 +11,10 @@ import (
 )
 
 func newNoteRouter(env *bootstrap.Env, timeout time.Duration, db bootstrap.Database, router *gin.RouterGroup) {
-	threadRepository := repository.NewPostgresNoteRepository(db)
+	noteRepository := repository.NewMysqlNoteRepository(db)
 	tokenManager := security.NewJwtTokenManager()
 	noteController := controllers.NoteController{
-		NoteUsecase:  usecase.NewNoteUsecase(threadRepository, timeout),
+		NoteUsecase:  usecase.NewNoteUsecase(noteRepository, timeout),
 		TokenManager: tokenManager,
 		Env:          env,
 	}

@@ -9,13 +9,13 @@ import (
 	"log/slog"
 )
 
-type postgresUserRepository struct {
+type mysqlUserRepository struct {
 	database bootstrap.Database
 }
 
-func (pur *postgresUserRepository) Add(ctx context.Context, user domains.SignupRequest) (domains.SignupResponseData, error) {
+func (mur *mysqlUserRepository) Add(ctx context.Context, user domains.SignupRequest) (domains.SignupResponseData, error) {
 	id := xid.New().String()
-	err := pur.database.Query.CreateUser(
+	err := mur.database.Query.CreateUser(
 		ctx,
 		database.CreateUserParams{
 			ID:       id,
@@ -36,24 +36,24 @@ func (pur *postgresUserRepository) Add(ctx context.Context, user domains.SignupR
 	return returned, nil
 }
 
-func (pur *postgresUserRepository) GetByUsername(ctx context.Context, username string) (domains.User, error) {
-	user, err := pur.database.Query.GetByUsername(ctx, username)
+func (mur *mysqlUserRepository) GetByUsername(ctx context.Context, username string) (domains.User, error) {
+	user, err := mur.database.Query.GetByUsername(ctx, username)
 	if err != nil {
 		return domains.User{}, err
 	}
 	return user.ToDomainsUser(), nil
 }
 
-func (pur *postgresUserRepository) GetByID(ctx context.Context, id string) (domains.User, error) {
-	user, err := pur.database.Query.GetUserByID(ctx, id)
+func (mur *mysqlUserRepository) GetByID(ctx context.Context, id string) (domains.User, error) {
+	user, err := mur.database.Query.GetUserByID(ctx, id)
 	if err != nil {
 		return domains.User{}, err
 	}
 	return user.ToDomainsUser(), nil
 }
 
-func NewPostgresUserRepository(database bootstrap.Database) domains.UserRepository {
-	return &postgresUserRepository{
+func NewMysqlUserRepository(database bootstrap.Database) domains.UserRepository {
+	return &mysqlUserRepository{
 		database: database,
 	}
 }

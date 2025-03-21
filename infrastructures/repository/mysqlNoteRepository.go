@@ -8,25 +8,25 @@ import (
 	"github.com/rs/xid"
 )
 
-type postgresNoteRepository struct {
+type mysqlNoteRepository struct {
 	database bootstrap.Database
 }
 
-func (pnr *postgresNoteRepository) Delete(c context.Context, id string) error {
-	return pnr.database.Query.DeleteNote(c, id)
+func (mnr *mysqlNoteRepository) Delete(c context.Context, id string) error {
+	return mnr.database.Query.DeleteNote(c, id)
 }
 
-func (pnr *postgresNoteRepository) EditNote(c context.Context, note domains.MutateNoteRequest, id string) error {
-	return pnr.database.Query.EditNote(c, database.EditNoteParams{
+func (mnr *mysqlNoteRepository) EditNote(c context.Context, note domains.MutateNoteRequest, id string) error {
+	return mnr.database.Query.EditNote(c, database.EditNoteParams{
 		ID:          id,
 		Title:       note.Title,
 		Description: note.Body,
 	})
 }
 
-func (pnr *postgresNoteRepository) Get(c context.Context, owner string) ([]domains.Note, error) {
+func (mnr *mysqlNoteRepository) Get(c context.Context, owner string) ([]domains.Note, error) {
 	parsedNotes := make([]domains.Note, 0)
-	notes, err := pnr.database.Query.GetNotes(c, owner)
+	notes, err := mnr.database.Query.GetNotes(c, owner)
 	if err != nil {
 		return parsedNotes, err
 	}
@@ -43,8 +43,8 @@ func (pnr *postgresNoteRepository) Get(c context.Context, owner string) ([]domai
 	return parsedNotes, nil
 }
 
-func (pnr *postgresNoteRepository) GetById(c context.Context, id string) (domains.Note, error) {
-	note, err := pnr.database.Query.GetNote(c, id)
+func (mnr *mysqlNoteRepository) GetById(c context.Context, id string) (domains.Note, error) {
+	note, err := mnr.database.Query.GetNote(c, id)
 	if err != nil {
 		return domains.Note{}, err
 	}
@@ -52,9 +52,9 @@ func (pnr *postgresNoteRepository) GetById(c context.Context, id string) (domain
 	return note.ToDomainsNote(), nil
 }
 
-func (pnr *postgresNoteRepository) Add(c context.Context, note domains.MutateNoteRequest, owner string) (domains.MutateNoteResponseData, error) {
+func (mnr *mysqlNoteRepository) Add(c context.Context, note domains.MutateNoteRequest, owner string) (domains.MutateNoteResponseData, error) {
 	id := xid.New().String()
-	err := pnr.database.Query.CreateNote(c, database.CreateNoteParams{
+	err := mnr.database.Query.CreateNote(c, database.CreateNoteParams{
 		ID:          id,
 		Title:       note.Title,
 		Description: note.Body,
@@ -71,8 +71,8 @@ func (pnr *postgresNoteRepository) Add(c context.Context, note domains.MutateNot
 	return response, nil
 }
 
-func NewPostgresNoteRepository(database bootstrap.Database) domains.NoteRepository {
-	return &postgresNoteRepository{
+func NewMysqlNoteRepository(database bootstrap.Database) domains.NoteRepository {
+	return &mysqlNoteRepository{
 		database: database,
 	}
 }
