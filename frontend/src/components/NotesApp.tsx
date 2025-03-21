@@ -93,7 +93,7 @@ export default function NotesApp() {
                         <main>
                             <Routes>
                                 <Route path='/' element={<HomePage/>} />
-                                <Route path='/notes/:id' element={<DetailPageWrapper/>} />
+                                <Route path='/notes/app/:id' element={<DetailPageWrapper/>} />
                                 <Route path='/notes/new' element={<AddNotePage/>}/>
                                 <Route path='*' element={<NotFoundPage/>}/>
                             </Routes>

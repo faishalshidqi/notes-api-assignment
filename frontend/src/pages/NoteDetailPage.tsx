@@ -16,11 +16,11 @@ export default function DetailPageWrapper() {
     return <DetailPage id={id ?? ''} onDelete={onDeleteHandler}/>
 }
 
-class DetailPage extends Component<{id: string, onDelete: (id: string) => void}, {note: {id: string, title: string, body: string, createdAt: string, archived: boolean}|undefined, loading: boolean}> {
+class DetailPage extends Component<{id: string, onDelete: (id: string) => void}, {note: {id: string, title: string, body: string, created_at: string, archived: boolean}|undefined, loading: boolean}> {
     constructor(props: {id: string, onDelete: (id: string) => void, onArchive: (id: string) => void}) {
         super(props)
         this.state = {
-            note: {id: '', title: '', body: '', createdAt: '', archived: false},
+            note: {id: '', title: '', body: '', created_at: '', archived: false},
             loading: true
         }
         this.onDeleteHandler = this.onDeleteHandler.bind(this)
@@ -48,7 +48,7 @@ class DetailPage extends Component<{id: string, onDelete: (id: string) => void},
         }
         return (
             <section className='detail-page'>
-                <NoteDetail onDelete={this.onDeleteHandler} id={this.state.note?.id ?? ''} title={this.state.note?.title ?? ''} body={this.state.note?.body ?? ''} createdAt={this.state.note?.createdAt ?? ''} archived={this.state.note?.archived ?? false} />
+                <NoteDetail onDelete={this.onDeleteHandler} id={this.state.note?.id ?? ''} title={this.state.note?.title ?? ''} body={this.state.note?.body ?? ''} created_at={this.state.note?.created_at ?? ''} archived={this.state.note?.archived ?? false} />
             </section>
         )
     }
